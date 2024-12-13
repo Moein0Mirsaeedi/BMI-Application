@@ -149,7 +149,7 @@ a{
         border-radius: 7px;
         padding: 5px;
         overflow: hidden;
-        height: 3px;
+        height: 250px;
     }
 
     .choose-box h1{
@@ -160,11 +160,10 @@ a{
 
     .choose-btn{
         display: flex;
-        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         gap: 30px;
-        margin-top: 50px;
+        margin-top: 40px;
     }
 
     .choose-btn a{
