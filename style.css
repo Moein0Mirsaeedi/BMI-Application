@@ -1,27 +1,27 @@
 
 @font-face {
     font-family: 'IRANYekan';
-    src: url('/fonts/IranYekanX/IRANYekanX-Medium.woff') format('woff'),
-    url('/fonts/IranYekanX/IRANYekanX-Medium.woff2') format('woff2'),
-    url('/fonts/IranYekanX/IRANYekanX-Medium.ttf') format('ttf');
+    src: url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Medium.woff') format('woff'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Medium.woff2') format('woff2'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Medium.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'IRANYekan';
-    src: url('/fonts/IranYekanX/IRANYekanX-Bold.woff') format('woff'),
-    url('/fonts/IranYekanX/IRANYekanX-Bold.woff2') format('woff2'),
-    url('/fonts/IranYekanX/IRANYekanX-Bold.ttf') format('ttf');
+    src: url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Bold.woff') format('woff'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Bold.woff2') format('woff2'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Bold.ttf') format('ttf');
     font-weight: Bold;
     font-style: Bold;
 }
 
 @font-face {
     font-family: 'IRANYekan';
-    src: url('/fonts/IranYekanX/IRANYekanX-Light.woff') format('woff'),
-    url('/fonts/IranYekanX/IRANYekanX-Light.woff2') format('woff2'),
-    url('/fonts/IranYekanX/IRANYekanX-Light.ttf') format('ttf');
+    src: url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Light.woff') format('woff'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Light.woff2') format('woff2'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Light.ttf') format('ttf');
     font-weight: Light;
     font-style: Light;
 }
