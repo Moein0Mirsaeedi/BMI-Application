@@ -89,9 +89,6 @@ input{
     z-index: 500;
 }
 
-.back-btn span{
-}
-
 body.dark{
     background-color: #262626;
 }

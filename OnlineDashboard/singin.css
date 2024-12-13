@@ -89,9 +89,6 @@ input{
     z-index: 500;
 }
 
-.back-btn span{
-}
-
 body.dark{
     background-color: #262626;
 }
@@ -117,4 +114,9 @@ body.dark .text-center p{
 body.dark .back-btn{
     background-color: #292929;
     box-shadow:inset 5px 5px 24px -10px rgba(255,255,255,0.46);
+}
+
+.btn-submits{
+    font-weight: bold;
+    
 }
