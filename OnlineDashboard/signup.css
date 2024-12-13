@@ -48,3 +48,73 @@ body{
 input{
     border: black 2px solid;
 }
+
+.change-theme{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+}
+
+.back-btn{
+    width: 100px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-shadow:inset 5px 5px 10px 5px rgba(0,0,0,0.46);
+}
+
+.back-btn .light{
+    font-size: 30px;
+    color: #000000;
+}
+
+.back-btn .dark{
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.back-btn span{
+    position: absolute;
+    width: 40%;
+    height: 80%;
+    border-radius: 200px;
+    background-color: #3C3C3C;
+    right: 5px;
+    z-index: 500;
+}
+
+.back-btn span{
+}
+
+body.dark{
+    background-color: #262626;
+}
+
+body.dark .change-theme .back-btn span{
+    transform: translateX(-50px);
+    background-color: #cfcfcf;
+}
+
+body.dark .form-box{
+    background-color: #171717;
+    color: #fff;
+}
+
+body.dark .text-center h1{
+    color: #fff;
+}
+
+body.dark .text-center p{
+    color: #fff;
+}
+
+body.dark .back-btn{
+    background-color: #292929;
+    box-shadow:inset 5px 5px 24px -10px rgba(255,255,255,0.46);
+}
