@@ -13,12 +13,18 @@ helpButton.addEventListener("click", function()
             chooseBox.style.height = "550px";
         }
         if(window.innerWidth <= 850){
-            chooseBox.style.height = "680px";
+            chooseBox.style.height = "620px";
         }
     }else if(helpButtonStatus == 1){
         helpButtonStatus = 0
-        chooseBox.style.height = "400px";
+
         helpIcon.style.transform = "rotate(0deg)"
+        if(window.innerWidth > 850){
+            chooseBox.style.height = "400px";
+        }
+        if(window.innerWidth <= 850){
+            chooseBox.style.height = "340px";
+        }
     }
 })
 
