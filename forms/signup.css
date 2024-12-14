@@ -116,7 +116,6 @@ body.dark .back-btn{
     box-shadow:inset 5px 5px 24px -10px rgba(255,255,255,0.46);
 }
 
-.btn-submits{
-    font-weight: bold;
-    
+body.dark input{
+    color: #000;
 }
