@@ -1,0 +1,102 @@
+@font-face {
+    font-family: 'IRANYekan';
+    src: url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Medium.woff') format('woff'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Medium.woff2') format('woff2'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Medium.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IRANYekan';
+    src: url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Bold.woff') format('woff'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Bold.woff2') format('woff2'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Bold.ttf') format('ttf');
+    font-weight: Bold;
+    font-style: Bold;
+}
+
+@font-face {
+    font-family: 'IRANYekan';
+    src: url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Light.woff') format('woff'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Light.woff2') format('woff2'),
+    url('https://moein0mirsaeedi.github.io/BMI-Application/fonts/IranYekanX/IRANYekanX-Light.ttf') format('ttf');
+    font-weight: Light;
+    font-style: Light;
+}
+
+*{
+    font-family: 'IRANYekan';
+}
+
+.change-theme{
+    position: absolute;
+    top: 13px;
+    left: 110px;
+    cursor: pointer;
+}
+
+.back-btn{
+    width: 70px;
+    height: 35px;
+    background-color: #ffffff;
+    border-radius: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    box-shadow:inset 5px 5px 10px 5px rgba(0,0,0,0.46);
+}
+
+.back-btn .light{
+    font-size: 20px;
+    color: #000000;
+}
+
+.back-btn .dark{
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.back-btn span{
+    position: absolute;
+    width: 40%;
+    height: 80%;
+    border-radius: 200px;
+    background-color: #3C3C3C;
+    right: 5px;
+    z-index: 500;
+}
+
+body.dark{
+    background-color: #262626;
+    color: #fff;
+}
+
+body.dark .change-theme .back-btn span{
+    transform: translateX(-32px);
+    background-color: #cfcfcf;
+}
+
+body.dark .form-box{
+    background-color: #171717;
+    color: #fff;
+}
+
+body.dark .text-center h1{
+    color: #fff;
+}
+
+body.dark .text-center p{
+    color: #fff;
+}
+
+body.dark .back-btn{
+    background-color: #292929;
+    box-shadow:inset 5px 5px 24px -10px rgba(255,255,255,0.46);
+}
+
+body.dark input{
+    color: #000;
+}
