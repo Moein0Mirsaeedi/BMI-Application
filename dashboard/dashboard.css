@@ -30,32 +30,30 @@
 }
 
 .change-theme{
-    position: absolute;
-    top: 13px;
-    left: 110px;
+    margin-left: 15px;
     cursor: pointer;
 }
 
 .back-btn{
-    width: 70px;
-    height: 35px;
+    width: 60px;
+    height: 30px;
     background-color: #ffffff;
     border-radius: 200px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 0 7px;
     box-shadow:inset 5px 5px 10px 5px rgba(0,0,0,0.46);
 }
 
 .back-btn .light{
-    font-size: 20px;
+    font-size: 15px;
     color: #000000;
 }
 
 .back-btn .dark{
-    font-size: 20px;
+    font-size: 15px;
     color: #ffffff;
 }
 
@@ -75,7 +73,7 @@ body.dark{
 }
 
 body.dark .change-theme .back-btn span{
-    transform: translateX(-32px);
+    transform: translateX(-28px);
     background-color: #cfcfcf;
 }
 
@@ -99,4 +97,8 @@ body.dark .back-btn{
 
 body.dark input{
     color: #000;
+}
+
+.recordbtn-nav{
+    margin-left: auto;
 }
