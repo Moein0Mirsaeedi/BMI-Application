@@ -1,3 +1,34 @@
+<?php
+
+require("../function.php");
+
+if(authenticated()){
+  redirect('../dashboard/index.php');
+}
+
+if($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['email']) && isset($_POST['password'])){
+  $errors = [];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $email = strtolower($email);
+
+  $errors = validateLogin($email, $password);
+
+  if(!count($errors)){
+      $users = get_data('users');
+      $user = login($users, $email, $password);
+      if($user){
+          $_SESSION['user'] = $user;
+          header("Location: ../dashboard/index.php");
+      }else{
+          $errors[] = "Email or password is incorrect";
+      }
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
@@ -5,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ورود به حساب کاربری</title>
       <script src="https://moein0mirsaeedi.github.io/BMI-Application/3.4.16"></script>
-      <link rel="stylesheet" href="/BMI-Application/forms/singin.css">
+      <link rel="stylesheet" href="/forms/singin.css">
 
 </head>
 <body>
@@ -32,6 +63,7 @@
           <div class="mt-5">
       
             <!-- Form -->
+             <form method="POST" action="">
               <div class="grid gap-y-4">
                 <!-- Form Group -->
                 <div>
@@ -77,9 +109,10 @@
                 </div>
                 <!-- End Checkbox -->
       
-                <a href="/BMI-Application/dashboard/index.php"><button class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-weight: bold;">ثبت نام</button></a>
+                <a><button class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-weight: bold;">ثبت نام</button></a>
               </div>
-
+              
+            </form>
             <!-- End Form -->
           </div>
         </div>
@@ -87,6 +120,6 @@
 
       <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="/BMI-Application/forms/signin.js"></script>
+    <script src="/forms/signin.js"></script>
 </body>
 </html>

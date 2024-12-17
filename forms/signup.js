@@ -53,28 +53,3 @@ function getlocalLogin(){
 }
 
 getlocalLogin()
-function submitForm() {
-
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-
-    const user = {
-        username: username,
-        email: email
-    };
-
-    fetch('/saveUser', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
