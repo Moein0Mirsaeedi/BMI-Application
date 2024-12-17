@@ -43,6 +43,7 @@ changeTheme.addEventListener("click", function(){
 })
 
 let localLogin = JSON.parse(localStorage.getItem('isLogin'))
+console.log(localLogin)
 
 function getlocalLogin(){
     if(localLogin == "isLogin"){
@@ -55,3 +56,18 @@ function getlocalLogin(){
 }
 
 getlocalLogin()
+
+// const fs = require('node:fs');
+
+// const content = 'Some content!';
+
+// fs.writeFile('/Users/joe/test.txt', content, err => {
+//   if (err) {
+//     console.error(err);
+//   } else {
+//     // file written successfully
+//   }
+// });
+
+// const data = 'Hello, this is the content of the text file!';
+// const blob = new Blob([data], { type: 'text/plain' });
