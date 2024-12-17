@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثبت رکورد جدید</title>
       <script src="https://moein0mirsaeedi.github.io/BMI-Application/3.4.16"></script>
-      <link rel="stylesheet" href="/BMI-Application/newRecord/record.css">
 </head>
 <body>
     <div id="changeTheme" class="change-theme">
@@ -115,6 +114,7 @@
                 </div>
 
                 <button class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-weight: bold;">ثبت نهایی اطلاعات</button>
+                <button class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg text-blue border border-gray-300 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-weight: bold;">انصراف</button>
               </div>
             <!-- </form> -->
             <!-- End Form -->
@@ -124,6 +124,7 @@
 
       <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="/BMI-Application/newRecord/record.js"></script>
+      <link rel="stylesheet" href="record.css">
+    <script src="record.js"></script>
 </body>
 </html>

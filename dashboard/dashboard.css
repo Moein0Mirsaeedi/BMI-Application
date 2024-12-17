@@ -27,6 +27,7 @@
 
 *{
     font-family: 'IRANYekan';
+    transition: all 0.5s;
 }
 
 .change-theme{

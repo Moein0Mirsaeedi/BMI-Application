@@ -1,3 +1,13 @@
+<?php
+
+require("../function.php");
+
+if(!authenticated()){
+    redirect('../forms/signin.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
@@ -36,7 +46,7 @@
     
 
       <div class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3">
-        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none recordbtn-nav" href="/BMI-Application/newRecord/record.php">
+        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none recordbtn-nav" href="/newRecord/record.php">
           <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14" />
             <path d="M12 5v14" />
@@ -83,6 +93,15 @@
                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
                   حساب کاربری
+                </a>
+                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="logout.php">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  خروج از حساب کاربری
                 </a>
               </div>
             </div>
@@ -395,7 +414,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                68
+                63
               </h3>
               <span class="flex items-center gap-x-1 text-green-600">
                 <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1737,7 +1756,7 @@
       })();
     });
   </script>
-  <link rel="stylesheet" href="/BMI-Application/dashboard/dashboard.css">
-  <script src="/BMI-Application/dashboard/dashboard.js"></script>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="dashboard.js"></script>
 </body>
 </html>
