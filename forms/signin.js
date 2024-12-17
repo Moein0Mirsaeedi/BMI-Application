@@ -41,3 +41,17 @@ changeTheme.addEventListener("click", function(){
         setLocalTheme()
     }
 })
+
+let localLogin = JSON.parse(localStorage.getItem('isLogin'))
+
+function getlocalLogin(){
+    if(localLogin == "isLogin"){
+        window.location.replace("/BMI-Application/dashboard/index.html");
+    }else if(localLogin == "noLogin"){
+
+    }else{
+        localStorage.setItem('isLogin', JSON.stringify("noLogin"))
+    }
+}
+
+getlocalLogin()
