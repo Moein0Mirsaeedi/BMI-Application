@@ -6,6 +6,10 @@ if(!authenticated()){
     redirect('../forms/signin.php');
 }
 
+$fileName = $_SESSION['user']['id'];
+$infos = get_data($fileName);
+$lastinfos = getLastPost($infos);
+
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +78,7 @@ if(!authenticated()){
             <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
               <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
                 <p class="text-sm text-gray-500 dark:text-neutral-500">وارد شده به عنوان:</p>
-                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">james@site.com</p>
+                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"><?= $_SESSION['user']['email'] ?></p>
               </div>
               <div class="p-1.5 space-y-0.5">
                 <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
@@ -414,9 +418,9 @@ if(!authenticated()){
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                63
+                <?= $lastinfos['weight'] ?>
               </h3>
-              <span class="flex items-center gap-x-1 text-green-600">
+              <!-- <span class="flex items-center gap-x-1 text-green-600">
                 <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
                   <polyline points="16 7 22 7 22 13" />
@@ -424,7 +428,7 @@ if(!authenticated()){
                 <span class="inline-block text-sm">
                   1.6
                 </span>
-              </span>
+              </span> -->
             </div>
           </div>
         </div>
@@ -453,17 +457,9 @@ if(!authenticated()){
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                176
+              <?= $lastinfos['height'] ?>
               </h3>
-              <span class="flex items-center gap-x-1 text-green-600">
-                <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                  <polyline points="16 7 22 7 22 13" />
-                </svg>
-                <span class="inline-block text-sm">
-                  2
-                </span>
-              </span>
+              
             </div>
           </div>
         </div>
@@ -492,17 +488,8 @@ if(!authenticated()){
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                22
+              <?= $lastinfos['bmi'] ?>
               </h3>
-              <span class="flex items-center gap-x-1 text-red-600">
-                <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="22 17 13.5 8.5 8.5 13.5 2 7" />
-                  <polyline points="16 17 22 17 22 11" />
-                </svg>
-                <span class="inline-block text-sm">
-                  0.5
-                </span>
-              </span>
             </div>
           </div>
         </div>
@@ -531,7 +518,7 @@ if(!authenticated()){
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                3,200
+              <?= $lastinfos['bmr'] ?>
               </h3>
             </div>
           </div>
@@ -669,270 +656,47 @@ if(!authenticated()){
                   </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                <?php foreach($infos as $info): ?>
+                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700 countRecord">
                   <tr>
                     
                     <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3 weights"><?= $info['weight'] ?></div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
+                      <div class="px-6 py-3 heights"><?= $info['height'] ?></div>
+                    </td>
+                    <td class="size-px whitespace-nowrap">
                       <div class="px-6 py-3">
-                        68
+                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium 
+                        <?php
+                          if($info['bmi'] < 18.5){
+                              echo("bg-yellow-100 text-yellow-800 dark:bg-yellow-500/10 dark:text-yellow-500");
+                          }else if($info['bmi'] >= 18.5 && $info['bmi'] <= 24.9){
+                              echo("bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500");
+                          }else if($info['bmi'] >= 25 && $info['bmi'] <= 29.9){
+                              echo("bg-yellow-100 text-yellow-800 dark:bg-yellow-500/10 dark:text-yellow-500");
+                          }else if($info['bmi'] >= 30){
+                              echo("bg-red-100 text-red-800 dark:bg-red-500/10 dark:text-red-500");
+                          }
+                        ?> rounded-full bmis"><?= $info['bmi'] ?></span>
                       </div>
                     </td>
                     <td class="size-px whitespace-nowrap">
                       <div class="px-6 py-3">
-                        176
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                          </svg>
-                          22
-                        </span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="text-sm text-gray-500 dark:text-neutral-500">27 مهر, 12:12</span>
+                        <span class="text-sm text-gray-500 dark:text-neutral-500 timeRecord"><?php
+                        $info['date_published'];
+                        $cutText = substr($info['date_published'], 0, 10);
+                        echo $cutText;?></span>
                       </div>
                     </td>
                     
                   </tr>
-
+                  
                   
                 </tbody>
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                  <tr>
-                    
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        68
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        176
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                          </svg>
-                          22
-                        </span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="text-sm text-gray-500 dark:text-neutral-500">27 مهر, 12:12</span>
-                      </div>
-                    </td>
-                    
-                  </tr>
-
-                  
-                </tbody>
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                  <tr>
-                    
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        78
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        175
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full dark:bg-yellow-500/10 dark:text-yellow-500">
-                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-                          </svg>
-                          26
-                        </span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="text-sm text-gray-500 dark:text-neutral-500">1 شهریور, 12:12</span>
-                      </div>
-                    </td>
-                    
-                  </tr>
-
-                  
-                </tbody>
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                  <tr>
-                    
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        68
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        176
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                          </svg>
-                          22
-                        </span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="text-sm text-gray-500 dark:text-neutral-500">27 مهر, 12:12</span>
-                      </div>
-                    </td>
-                    
-                  </tr>
-
-                  
-                </tbody>
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                  <tr>
-                    
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        89
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        175
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full dark:bg-red-500/10 dark:text-red-500">
-                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                          </svg>
-                          32
-                        </span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="text-sm text-gray-500 dark:text-neutral-500">15 خرداد, 12:12</span>
-                      </div>
-                    </td>
-                    
-                  </tr>
-
-                  
-                </tbody>
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                  <tr>
-                    
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        68
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        176
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                          </svg>
-                          22
-                        </span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="text-sm text-gray-500 dark:text-neutral-500">27 مهر, 12:12</span>
-                      </div>
-                    </td>
-                    
-                  </tr>
-
-                  
-                </tbody>
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                  <tr>
-                    
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        68
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        176
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                          </svg>
-                          22
-                        </span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="text-sm text-gray-500 dark:text-neutral-500">27 مهر, 12:12</span>
-                      </div>
-                    </td>
-                    
-                  </tr>
-
-                  
-                </tbody>
-                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                  <tr>
-                    
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        68
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        176
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                          <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                          </svg>
-                          22
-                        </span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <span class="text-sm text-gray-500 dark:text-neutral-500 ss22">27 مهر, 12:12</span>
-                      </div>
-                    </td>
-                    
-                  </tr>
-
-                  
-                </tbody>
+                <?php endforeach ?>
+                
               </table>
               <!-- End Table -->
 
@@ -940,11 +704,11 @@ if(!authenticated()){
               <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
                 <div>
                   <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    <span class="font-semibold text-gray-800 dark:text-neutral-200">12</span> گزارش
+                    <span class="font-semibold text-gray-800 dark:text-neutral-200" id="countRecord"></span> گزارش
                   </p>
                 </div>
 
-                <div>
+                <!-- <div>
                   <div class="inline-flex gap-x-2">
                     <button type="button" class="py-1.5 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
                       <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -960,7 +724,7 @@ if(!authenticated()){
                       </svg>
                     </button>
                   </div>
-                </div>
+                </div> -->
               </div>
               <!-- End Footer -->
             </div>
@@ -985,6 +749,7 @@ if(!authenticated()){
   <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="dashboard.js"></script>
 
   <script>
     window.addEventListener("load", () => {
@@ -1175,6 +940,18 @@ if(!authenticated()){
     });
   </script>
   <script>
+    let height = document.getElementsByClassName('heights');
+    let heightI = []
+    for(const fruit of height){
+        heightI.push(fruit.innerHTML)
+    };
+    let timeRecord = document.getElementsByClassName('timeRecord');
+    let timeRecordI = []
+    for(const a of timeRecord){
+      timeRecordI.push(a.innerHTML)
+    };
+    console.log(timeRecordI)
+
     window.addEventListener("load", () => {
       (function () {
         buildChart(
@@ -1193,201 +970,7 @@ if(!authenticated()){
             series: [
               {
                 name: "قد",
-                data: [170, 171, 171, 172, 173, 173, 174, 175, 175],
-              },
-            ],
-            legend: {
-              show: false,
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            stroke: {
-              curve: "straight",
-              width: 2,
-            },
-            grid: {
-              strokeDashArray: 2,
-            },
-            fill: {
-              type: "gradient",
-              gradient: {
-                type: "vertical",
-                shadeIntensity: 1,
-                opacityFrom: 0.1,
-                opacityTo: 0.8,
-              },
-            },
-            xaxis: {
-              type: "category",
-              tickPlacement: "on",
-              categories: [
-              "15 خردار 1403",
-                "29 خرداد 1403",
-                "18 تیر 1403",
-                "31 تیر 1403",
-                "15 مرداد 1403",
-                "31 مرداد 1403",
-                "9 شهریور 1403",
-                "15 مهر 1403",
-                "27 مهر 1403",
-              ],
-              axisBorder: {
-                show: false,
-              },
-              axisTicks: {
-                show: false,
-              },
-              crosshairs: {
-                stroke: {
-                  dashArray: 0,
-                },
-                dropShadow: {
-                  show: false,
-                },
-              },
-              tooltip: {
-                enabled: false,
-              },
-              labels: {
-                style: {
-                  colors: "#9ca3af",
-                  fontSize: "13px",
-                  fontFamily: "Inter, ui-sans-serif",
-                  fontWeight: 400,
-                },
-                formatter: (title) => {
-                  let t = title;
-
-                  if (t) {
-                    const newT = t.split(" ");
-                    t = `${newT[0]} ${newT[1].slice(0, 3)}`;
-                  }
-
-                  return t;
-                },
-              },
-            },
-            yaxis: {
-              labels: {
-                align: "left",
-                minWidth: 0,
-                maxWidth: 140,
-                style: {
-                  colors: "#9ca3af",
-                  fontSize: "13px",
-                  fontFamily: "Inter, ui-sans-serif",
-                  fontWeight: 400,
-                },
-                formatter: (value) => (value >= 1000 ? `${value / 1000}k` : value),
-              },
-            },
-            tooltip: {
-              x: {
-                format: "MMMM yyyy",
-              },
-              y: {
-                formatter: (value) =>
-                  `${value >= 1000 ? `${value / 1000}k` : value}`,
-              },
-              custom: function (props) {
-                const { categories } = props.ctx.opts.xaxis;
-                const { dataPointIndex } = props;
-                const title = categories[dataPointIndex].split(" ");
-                const newTitle = `${title[0]} ${title[1]}`;
-
-                return buildTooltip(props, {
-                  title: newTitle,
-                  mode,
-                  valuePrefix: "",
-                  hasTextLabel: true,
-                  markerExtClasses: "!rounded-sm",
-                  wrapperExtClasses: "min-w-28",
-                });
-              },
-            },
-            responsive: [
-              {
-                breakpoint: 568,
-                options: {
-                  chart: {
-                    height: 300,
-                  },
-                  labels: {
-                    style: {
-                      colors: "#9ca3af",
-                      fontSize: "11px",
-                      fontFamily: "Inter, ui-sans-serif",
-                      fontWeight: 400,
-                    },
-                    offsetX: -2,
-                    formatter: (title) => title.slice(0, 3),
-                  },
-                  yaxis: {
-                    labels: {
-                      align: "left",
-                      minWidth: 0,
-                      maxWidth: 140,
-                      style: {
-                        colors: "#9ca3af",
-                        fontSize: "11px",
-                        fontFamily: "Inter, ui-sans-serif",
-                        fontWeight: 400,
-                      },
-                      formatter: (value) =>
-                        value >= 1000 ? `${value / 1000}k` : value,
-                    },
-                  },
-                },
-              },
-            ],
-          }),
-          {
-            colors: ["#2563eb", "#9333ea"],
-            fill: {
-              gradient: {
-                stops: [0, 90, 100],
-              },
-            },
-            grid: {
-              borderColor: "#e5e7eb",
-            },
-          },
-          {
-            colors: ["#3b82f6", "#a855f7"],
-            fill: {
-              gradient: {
-                stops: [100, 90, 0],
-              },
-            },
-            grid: {
-              borderColor: "#404040",
-            },
-          }
-        );
-      })();
-    });
-  </script>
-  <script>
-    window.addEventListener("load", () => {
-      (function () {
-        buildChart(
-          "#hs-single-area-chart2",
-          (mode) => ({
-            chart: {
-              height: 300,
-              type: "area",
-              toolbar: {
-                show: false,
-              },
-              zoom: {
-                enabled: false,
-              },
-            },
-            series: [
-              {
-                name: "وزن",
-                data: [75, 74, 73.5, 73, 73.5, 73.2, 72.6, 71, 70],
+                data: heightI,
               },
             ],
             legend: {
@@ -1563,6 +1146,212 @@ if(!authenticated()){
     });
   </script>
   <script>
+    let weights = document.getElementsByClassName('weights');
+    let weightsI = []
+    for(const fruit of weights){
+        weightsI.push(fruit.innerHTML)
+    };
+
+    window.addEventListener("load", () => {
+      (function () {
+        buildChart(
+          "#hs-single-area-chart2",
+          (mode) => ({
+            chart: {
+              height: 300,
+              type: "area",
+              toolbar: {
+                show: false,
+              },
+              zoom: {
+                enabled: false,
+              },
+            },
+            series: [
+              {
+                name: "وزن",
+                data: weightsI,
+              },
+            ],
+            legend: {
+              show: false,
+            },
+            dataLabels: {
+              enabled: false,
+            },
+            stroke: {
+              curve: "straight",
+              width: 2,
+            },
+            grid: {
+              strokeDashArray: 2,
+            },
+            fill: {
+              type: "gradient",
+              gradient: {
+                type: "vertical",
+                shadeIntensity: 1,
+                opacityFrom: 0.1,
+                opacityTo: 0.8,
+              },
+            },
+            xaxis: {
+              type: "category",
+              tickPlacement: "on",
+              categories: [
+                "15 خردار 1403",
+                "29 خرداد 1403",
+                "18 تیر 1403",
+                "31 تیر 1403",
+                "15 مرداد 1403",
+                "31 مرداد 1403",
+                "9 شهریور 1403",
+                "15 مهر 1403",
+                "27 مهر 1403",
+              ],
+              axisBorder: {
+                show: false,
+              },
+              axisTicks: {
+                show: false,
+              },
+              crosshairs: {
+                stroke: {
+                  dashArray: 0,
+                },
+                dropShadow: {
+                  show: false,
+                },
+              },
+              tooltip: {
+                enabled: false,
+              },
+              labels: {
+                style: {
+                  colors: "#9ca3af",
+                  fontSize: "13px",
+                  fontFamily: "Inter, ui-sans-serif",
+                  fontWeight: 400,
+                },
+                formatter: (title) => {
+                  let t = title;
+
+                  if (t) {
+                    const newT = t.split(" ");
+                    t = `${newT[0]} ${newT[1].slice(0, 3)}`;
+                  }
+
+                  return t;
+                },
+              },
+            },
+            yaxis: {
+              labels: {
+                align: "left",
+                minWidth: 0,
+                maxWidth: 140,
+                style: {
+                  colors: "#9ca3af",
+                  fontSize: "13px",
+                  fontFamily: "Inter, ui-sans-serif",
+                  fontWeight: 400,
+                },
+                formatter: (value) => (value >= 1000 ? `${value / 1000}k` : value),
+              },
+            },
+            tooltip: {
+              x: {
+                format: "MMMM yyyy",
+              },
+              y: {
+                formatter: (value) =>
+                  `${value >= 1000 ? `${value / 1000}k` : value}`,
+              },
+              custom: function (props) {
+                const { categories } = props.ctx.opts.xaxis;
+                const { dataPointIndex } = props;
+                const title = categories[dataPointIndex].split(" ");
+                const newTitle = `${title[0]} ${title[1]}`;
+
+                return buildTooltip(props, {
+                  title: newTitle,
+                  mode,
+                  valuePrefix: "",
+                  hasTextLabel: true,
+                  markerExtClasses: "!rounded-sm",
+                  wrapperExtClasses: "min-w-28",
+                });
+              },
+            },
+            responsive: [
+              {
+                breakpoint: 568,
+                options: {
+                  chart: {
+                    height: 300,
+                  },
+                  labels: {
+                    style: {
+                      colors: "#9ca3af",
+                      fontSize: "11px",
+                      fontFamily: "Inter, ui-sans-serif",
+                      fontWeight: 400,
+                    },
+                    offsetX: -2,
+                    formatter: (title) => title.slice(0, 3),
+                  },
+                  yaxis: {
+                    labels: {
+                      align: "left",
+                      minWidth: 0,
+                      maxWidth: 140,
+                      style: {
+                        colors: "#9ca3af",
+                        fontSize: "11px",
+                        fontFamily: "Inter, ui-sans-serif",
+                        fontWeight: 400,
+                      },
+                      formatter: (value) =>
+                        value >= 1000 ? `${value / 1000}k` : value,
+                    },
+                  },
+                },
+              },
+            ],
+          }),
+          {
+            colors: ["#2563eb", "#9333ea"],
+            fill: {
+              gradient: {
+                stops: [0, 90, 100],
+              },
+            },
+            grid: {
+              borderColor: "#e5e7eb",
+            },
+          },
+          {
+            colors: ["#3b82f6", "#a855f7"],
+            fill: {
+              gradient: {
+                stops: [100, 90, 0],
+              },
+            },
+            grid: {
+              borderColor: "#404040",
+            },
+          }
+        );
+      })();
+    });
+  </script>
+  <script>
+    let bmi = document.getElementsByClassName('bmis');
+    let bmiI = []
+    for(const fruit of bmi){
+        bmiI.push(fruit.innerHTML)
+    };
+
     window.addEventListener("load", () => {
       (function () {
         buildChart(
@@ -1581,7 +1370,7 @@ if(!authenticated()){
             series: [
               {
                 name: "BMI",
-                data: [25, 24.8, 24.5, 24.2, 24, 23.3, 23, 22.5, 22],
+                data: bmiI,
               },
             ],
             legend: {
@@ -1757,6 +1546,5 @@ if(!authenticated()){
     });
   </script>
   <link rel="stylesheet" href="dashboard.css">
-  <script src="dashboard.js"></script>
 </body>
 </html>

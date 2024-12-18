@@ -41,3 +41,13 @@ changeTheme.addEventListener("click", function(){
         setLocalTheme()
     }
 })
+
+let record = document.getElementsByClassName('countRecord');
+let countRecord = document.getElementById('countRecord');
+let count = 0;
+for(const fruit of record){
+    count++
+};
+
+countRecord.innerHTML = count
+

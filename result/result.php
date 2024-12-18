@@ -19,8 +19,8 @@ $gender = $infos['gender'];
 $weight = $infos['weight'];
 $height = $infos['height'];
 $exerceise = $infos['exerceise'];
-$bmi = $weight / (($height/100)*($height/100));
-$bmi = round($bmi, 1);
+$bmi = $infos['bmi'];
+
 $bmiStatus = "none";
 if($bmi < 18.5){
     $bmiStatus = "شما دچار کمبود وزن هستید.";

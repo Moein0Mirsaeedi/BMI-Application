@@ -25,6 +25,28 @@ if($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['age']) && isset($_POST[
       $id = 1;
     }
 
+    $bmi = $weight / (($height/100)*($height/100));
+    $bmi = round($bmi, 1);
+
+    $bmr = "none";
+    if($gender == "women"){
+        $bmr = ($height*3.098) + ($weight*9.247) - ($age*4.330) + 447.593;
+    }else if($gender == "men"){
+        $bmr = ($height*4.799) + ($weight*13.397) - ($age*5.677) + 88.362;
+    }
+    if($exerceise == 1){
+        $bmr *= 1.2;
+    }else if($exerceise == 2){
+        $bmr *= 1.3;
+    }else if($exerceise == 3){
+        $bmr *= 1.4;
+    }else if($exerceise == 4){
+        $bmr *= 1.5;
+    }else if($exerceise == 5){
+        $bmr *= 1.7;
+    }
+    $bmr = round($bmr, 0);
+
     $newUser = [
           'id' => $id,
           'age' => $age,
@@ -32,6 +54,9 @@ if($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['age']) && isset($_POST[
           'weight' => $weight,
           'height' => $height,
           'exerceise' => $exerceise,
+          'bmi' => $bmi,
+          'bmr' => $bmr,
+          'date_published' => date('Y-m-d H:i:s'),
   ];
   $infos[] = $newUser;
   setData($fileName, $infos);
