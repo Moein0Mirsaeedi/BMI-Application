@@ -34,6 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['email']) && isset($_POS
       ];
       $users[] = $newUser;
       setData('users', $users);
+      setData($id, []);
 
       header("Location: ./signin.php");
       }
