@@ -8,8 +8,6 @@ if(authenticated()){
 
 // setData("test", $reza);
 
-echo ($_SERVER["REQUEST_METHOD"]);
-
 if($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm-password'])){
   $errors = [];
   $email = $_POST['email'];

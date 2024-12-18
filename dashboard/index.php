@@ -8,7 +8,9 @@ if(!authenticated()){
 
 $fileName = $_SESSION['user']['id'];
 $infos = get_data($fileName);
-$lastinfos = getLastPost($infos);
+if($infos){
+  $lastinfos = getLastPost($infos);
+}
 
 ?>
 
@@ -418,7 +420,7 @@ $lastinfos = getLastPost($infos);
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                <?= $lastinfos['weight'] ?>
+                <?php if(isset($lastinfos['weight'])){ echo($lastinfos['weight']); }?>
               </h3>
               <!-- <span class="flex items-center gap-x-1 text-green-600">
                 <svg class="inline-block size-4 self-center" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -457,7 +459,7 @@ $lastinfos = getLastPost($infos);
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-              <?= $lastinfos['height'] ?>
+              <?php if(isset($lastinfos['height'])){ echo($lastinfos['height']); }?>
               </h3>
               
             </div>
@@ -488,7 +490,7 @@ $lastinfos = getLastPost($infos);
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-              <?= $lastinfos['bmi'] ?>
+              <?php if(isset($lastinfos['bmi'])){ echo($lastinfos['bmi']); }?>
               </h3>
             </div>
           </div>
@@ -518,7 +520,7 @@ $lastinfos = getLastPost($infos);
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-              <?= $lastinfos['bmr'] ?>
+              <?php if(isset($lastinfos['bmr'])){ echo($lastinfos['bmr']); }?>
               </h3>
             </div>
           </div>
@@ -606,7 +608,7 @@ $lastinfos = getLastPost($infos);
                   <div class="inline-flex gap-x-2">
                     
 
-                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/BMI-Application/newRecord/record.php">
+                    <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/newRecord/record.php">
                       <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
@@ -656,7 +658,7 @@ $lastinfos = getLastPost($infos);
                   </tr>
                 </thead>
 
-                <?php foreach($infos as $info): ?>
+                <?php if($infos) foreach($infos as $info): ?>
                 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700 countRecord">
                   <tr>
                     
