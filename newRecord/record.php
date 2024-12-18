@@ -156,11 +156,11 @@ if($_SERVER["REQUEST_METHOD"] == 'POST' && isset($_POST['age']) && isset($_POST[
                   </select>
                 </div>
 
-                <a><button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-weight: bold;">ثبت نهایی اطلاعات</button></a>
+                <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-weight: bold;">ثبت نهایی اطلاعات</button>
               </div>
             <!-- </form> -->
           </form>
-          <a href="../forms/signin.php"><button class="w-full mt-4 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg text-blue border border-gray-300 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-weight: bold;">انصراف</button></a>
+          <a href="../dashboard/dashboard.php"><button class="w-full mt-4 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg text-blue border border-gray-300 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" style="font-weight: bold;">انصراف</button></a>
             <!-- End Form -->
           </div>
         </div>
